@@ -50,9 +50,9 @@ echo '<%- include("partials/_header") %>
 
 cd partials
 
-echo '    <script src="../public/lib/jquery/jquery.min.js"></script>
-    <script src="../public/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../public/js/script.js"></script>
+echo '    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>' >> _footer.ejs
 
