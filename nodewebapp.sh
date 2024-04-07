@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Dosya ve Dizinleri Oluşturma
-touch app.js
+touch index.js
 npm init --yes
 npm i express ejs bootstrap jquery
 mkdir public
@@ -15,6 +15,7 @@ touch script.js
 cd ../../views
 touch index.ejs
 touch privacy.ejs
+touch 404.ejs
 mkdir partials
 cd partials
 touch _header.ejs _footer.ejs
@@ -37,17 +38,36 @@ cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 #Dosyaları Düzenleme
 echo 'var express = require("express")
 var app = express()
+var path = require("path")
+
+const currentDir = __dirname
+const currentFolderName = path.basename(currentDir)
 
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 
-app.get("/", (req, res) => { res.render("index", { pageTitle: "Ana Sayfa" }) })
+app.get("/privacy", (req, res) => {
+    res.render("privacy", {
+        pageTitle: "Privacy | " + currentFolderName
+    })
+})
 
-app.get("/privacy", (req, res) => { res.render("privacy", { pageTitle: "Privacy" }) })
+app.get("/", (req, res) => {
+    res.render("index", {
+        pageTitle: "Home Page | " + currentFolderName
+    })
+})
+
+app.get("*", (req, res) => {
+    res.status(404).render("404",{
+        message:"This page does not exist.",
+        pageTitle:"Error | " + currentFolderName
+    })
+})
 
 var port = 3000
 app.listen(port, () => { console.log("Proje " + port + " portu altında çalışıyor | http://localhost:" + port + " | Durdurmak için Ctrl+C") })
-' >> app.js
+' >> index.js
 
 cd views
 
@@ -71,6 +91,19 @@ echo '<%- include("partials/_header") %>
     <p>Place your privacy content here.</p>
 </div>
 <%- include("partials/_footer") %>' >> privacy.ejs
+
+echo '<%- include("partials/_header") %>
+<%- include("components/navbar") %>
+
+<div class="container mt-3">
+    <h1>Error</h1>
+    <hr>
+    <p class="text-danger">
+        <span class="text-dark">Error Message: </span><%= message %>    
+    </p>
+</div>
+
+<%- include("partials/_footer") %>' >> 404.ejs
 
 cd partials
 
@@ -114,5 +147,5 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
 
 cd ../..
 
-echo 'Project has created without any problems. Write "node app.js" to run | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node app.js" yaz' 
+echo 'Project has created without any problems. Write "node index.js" to run | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
 
