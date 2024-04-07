@@ -14,9 +14,14 @@ cd ../js
 touch script.js
 cd ../../views
 touch index.ejs
+touch privacy.ejs
 mkdir partials
 cd partials
 touch _header.ejs _footer.ejs
+cd ../
+mkdir components
+cd components/
+touch navbar.ejs
 cd ../..
 
 #Paketleri Projeye Yerleştirme
@@ -33,20 +38,39 @@ cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 echo 'var express = require("express")
 var app = express()
 
-app.set("view engine","ejs")
+app.set("view engine", "ejs")
 app.use(express.static("public"))
 
-app.get("/",(req,res)=>{res.render("index",{pageTitle:"Ana Sayfa"})})
+app.get("/", (req, res) => { res.render("index", { pageTitle: "Ana Sayfa" }) })
+
+app.get("/privacy", (req, res) => { res.render("privacy", { pageTitle: "Privacy" }) })
 
 var port = 3000
-app.listen(port,()=>{console.log("Proje "+port+" portu altında çalışıyor | http://127.0.0.1:"+port+" <- Buna Tıklayarak projene bakabilirsin. <3")})' >> app.js
+app.listen(port, () => { console.log("Proje " + port + " portu altında çalışıyor | http://localhost:" + port + " | Durdurmak için Ctrl+C") })
+' >> app.js
 
 cd views
 
 echo '<%- include("partials/_header") %>
-    
 
-<%- include("partials/_footer") %>' >> index.ejs
+<%- include("components/navbar") %>
+
+<div class="text-center mt-3">
+    <h1 class="text-primary">This Your Project Page</h1>
+    <p>Look at <strong>views/index.ejs </strong>to edit here.</p>
+</div>
+
+<%- include("partials/_footer") %>
+' >> index.ejs
+
+echo '<%- include("partials/_header") %>
+<%- include("components/navbar") %>
+
+<div class="container mt-3">
+    <h1>This is a Privacy Page</h1>
+    <p>Place your privacy content here.</p>
+</div>
+<%- include("partials/_footer") %>' >> privacy.ejs
 
 cd partials
 
@@ -67,7 +91,28 @@ echo '<!DOCTYPE html>
 </head>
 <body>' >> _header.ejs
 
+cd ../components
+
+echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <div class="container">
+    <a class="navbar-brand" href="/">Node Web App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/privacy">Privacy</a>
+        </li>
+    </div>
+  </div>
+</nav>' >> navbar.ejs
+
 cd ../..
 
-
+echo 'Project has created without any problems. Write "node app.js" to run | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node app.js" yaz' 
 
