@@ -3,7 +3,7 @@
 #Dosya ve Dizinleri Oluşturma
 touch index.js
 npm init --yes
-npm i express ejs bootstrap jquery
+npm i express ejs bootstrap jquery morgan
 mkdir public
 mkdir views
 cd public
@@ -36,15 +36,17 @@ cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/lib/bootstrap/j
 cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 
 #Dosyaları Düzenleme
-echo 'var express = require("express")
-var app = express()
-var path = require("path")
+echo 'const express = require("express")
+const app = express()
+const path = require("path")
+const morgan = require("morgan")
 
 const currentDir = __dirname
 const currentFolderName = path.basename(currentDir)
 
 app.set("view engine", "ejs")
 app.use(express.static("public"))
+app.use(morgan())
 
 app.get("/privacy", (req, res) => {
     res.render("privacy", {
