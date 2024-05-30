@@ -4,6 +4,7 @@
 touch index.js
 npm init --yes
 npm i express ejs bootstrap jquery morgan
+npm i -save--dev nodemon
 mkdir public
 mkdir views
 cd public
@@ -152,5 +153,5 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
 
 cd ../..
 
-echo 'Project has created without any problems. Write "node index.js" to run | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
+echo 'Project has created without any problems. Write "node index.js" to run or write "nodemon index.js" to run in development mode. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
 
