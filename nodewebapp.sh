@@ -4,7 +4,7 @@
 touch index.js
 npm init --yes
 npm i express ejs bootstrap jquery morgan
-npm i -save--dev nodemon
+npm i --save-dev nodemon
 mkdir public
 mkdir views
 cd public
