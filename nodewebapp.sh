@@ -68,7 +68,7 @@ app.get("*", (req, res) => {
 })
 
 var port = 3000
-app.listen(port, () => { console.log("Proje " + port + " portu altında çalışıyor | http://localhost:" + port + " | Durdurmak için Ctrl+C") })
+app.listen(port, () => { console.log("Running at port +"port+" | Press Ctrl+C to stop") })
 ' >> index.js
 
 cd views
