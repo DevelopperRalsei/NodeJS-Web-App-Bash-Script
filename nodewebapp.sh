@@ -143,6 +143,9 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
         <li class="nav-item">
           <a class="nav-link" href="/privacy">Privacy</a>
         </li>
+        <li class="nav-item">
+          <a href="/error" class="nav-link">Error Page</a>
+        </li>
     </div>
   </div>
 </nav>' >> navbar.ejs
