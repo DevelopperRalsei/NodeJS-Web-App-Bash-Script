@@ -9,6 +9,7 @@ This project somehow helps you to quickly start a simple web application using n
  - EJS
  - Morgan
 ### Usage
+You can use git bash to run this in windows.
 
 Create a new empty project folder and run this script in the created empty folder.
 
@@ -26,6 +27,7 @@ Bu proje size expressjs, ejs ve nodejs kullanarak hazır ve basit bir web uygula
  - EJS 
  - Morgan
 ### Kullanım
+Windows'ta kullanmak için git bash kullanabilirsiniz.
 
 Yeni boş bir proje dosyası oluşturduktan sonra bu script'ti oluşturulan boş klalörün içinde çalıştırın.
 
