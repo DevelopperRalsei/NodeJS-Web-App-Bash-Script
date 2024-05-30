@@ -67,7 +67,7 @@ app.get("*", (req, res) => {
     })
 })
 
-var port = 3000
+var port = 3000 || process.env.PORT
 app.listen(port, () => { console.log("Running at port +"port+" | Press Ctrl+C to stop") })
 ' >> index.js
 
