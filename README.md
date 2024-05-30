@@ -18,6 +18,7 @@ When the entire installation is completed, you can delete the script if you want
 ### Requirements
 - node
 - npm
+- A bash console (You can use git bash in Windows) 
 
 # Tr
 
@@ -30,6 +31,7 @@ Bu proje size expressjs, ejs ve nodejs kullanarak hazır ve basit bir web uygula
  - ExpressJS
  - EJS 
  - Morgan
+ - 
 ### Kullanım
 Windows'ta kullanmak için git bash kullanabilirsiniz.
 
@@ -41,3 +43,4 @@ Yeni boş bir proje dosyası oluşturduktan sonra bu script'ti oluşturulan boş
 
 - node
 - npm
+- Bash çalıştırabilen bir konsol penceresi (Windows için git bash kullanılabilir)
