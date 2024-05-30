@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Dosya ve Dizinleri Oluşturma
+#Dosya ve Dizinleri Oluşturma | Creating files and directories
 touch index.js
 npm init --yes
 npm i express ejs bootstrap jquery morgan
@@ -26,7 +26,7 @@ cd components/
 touch navbar.ejs
 cd ../..
 
-#Paketleri Projeye Yerleştirme
+#Paketleri Projeye Yerleştirme | Placing packages to project
 cd public/lib
 mkdir bootstrap jquery
 cd bootstrap
@@ -36,7 +36,7 @@ cp node_modules/bootstrap/dist/css/bootstrap.min.css public/lib/bootstrap/css/
 cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/lib/bootstrap/js/
 cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 
-#Dosyaları Düzenleme
+#Dosyaları Düzenleme | Editing created files
 echo 'const express = require("express")
 const app = express()
 const path = require("path")
@@ -69,7 +69,7 @@ app.get("*", (req, res) => {
 })
 
 var port = 3000 || process.env.PORT
-app.listen(port, () => { console.log("Running at port "+port+" | Press Ctrl+C to stop") })
+app.listen(port, () => { console.log("Running at port "+port+" | http://localhost:"+port+" | Press Ctrl+C to stop") })
 ' >> index.js
 
 cd views
@@ -151,7 +151,7 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
   </div>
 </nav>' >> navbar.ejs
 
+# Son | Finish
 cd ../..
 
-echo 'Project has created without any problems. Write "node index.js" to run or write "nodemon index.js" to run in development mode. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" ya da geliştirme modunda çalıştırmak için "nodemon index.js" yaz' 
-
+echo 'Project has created without any problems. Write "node index.js" to run or write "nodemon index.js" to run in development mode. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
