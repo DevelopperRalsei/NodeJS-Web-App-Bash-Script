@@ -15,6 +15,10 @@ Create a new empty project folder and run this script in the created empty folde
 
 When the entire installation is completed, you can delete the script if you want.
 
+### Requirements
+- node
+- npm
+
 # Tr
 
 Bu proje size expressjs, ejs ve nodejs kullanarak hazır ve basit bir web uygulaması hazırlar
@@ -32,3 +36,8 @@ Windows'ta kullanmak için git bash kullanabilirsiniz.
 Yeni boş bir proje dosyası oluşturduktan sonra bu script'ti oluşturulan boş klalörün içinde çalıştırın.
 
 İsteğe başlı olarak kurulum sonrasında script'ti silebilirsiniz.
+
+### Gerekli
+
+- node
+- npm
