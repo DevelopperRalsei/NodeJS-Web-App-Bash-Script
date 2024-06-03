@@ -46,7 +46,7 @@ const morgan = require("morgan")
 const helmet = require("helmet")
 const cors = require("cors")
 const engine = require("ejs-locals")
-require("dotenv").config
+require("dotenv").config()
 
 app.engine("ejs",engine)
 app.set("view engine", "ejs")
