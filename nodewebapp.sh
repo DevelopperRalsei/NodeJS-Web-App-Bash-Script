@@ -3,10 +3,13 @@
 #Dosya ve Dizinleri Oluşturma | Creating files and directories
 touch index.js
 npm init --yes
-npm i express ejs bootstrap jquery morgan
+npm i express ejs ejs-locals bootstrap jquery morgan cors dotenv helmet
 npm i --save-dev nodemon
 mkdir public
 mkdir views
+mkdir controllers && cd controllers && touch homeController.js && cd ..
+mkdir routes && cd routes && touch homeRoute.js && cd ..
+touch .env
 cd public
 mkdir lib js css
 cd css
@@ -14,19 +17,16 @@ touch style.css
 cd ../js
 touch script.js
 cd ../../views
+touch layout.ejs
 touch index.ejs
 touch privacy.ejs
 touch 404.ejs
-mkdir partials
-cd partials
-touch _header.ejs _footer.ejs
-cd ../
 mkdir components
 cd components/
 touch navbar.ejs
 cd ../..
 
-#Paketleri Projeye Yerleştirme | Placing packages to project
+#Paketleri Projeye Yerleştirme | Inserting packages to project
 cd public/lib
 mkdir bootstrap jquery
 cd bootstrap
@@ -37,84 +37,72 @@ cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js public/lib/bootstrap/j
 cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 
 #Dosyaları Düzenleme | Editing created files
+
+echo 'PORT = 8080' > .env
+
 echo 'const express = require("express")
 const app = express()
-const path = require("path")
 const morgan = require("morgan")
+const helmet = require("helmet")
+const cors = require("cors")
+const engine = require("ejs-locals")
+require("dotenv").config
 
-const currentDir = __dirname
-const currentFolderName = path.basename(currentDir)
-
+app.engine("ejs",engine)
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(morgan("common"))
+app.use(helmet())
+app.use(cors())
 
-app.get("/privacy", (req, res) => {
-    res.render("privacy", {
-        pageTitle: "Privacy | " + currentFolderName
-    })
-})
+const homeRoute = require("./routes/homeRoute")
+app.use("/",homeRoute)
 
-app.get("/", (req, res) => {
-    res.render("index", {
-        pageTitle: "Home Page | " + currentFolderName
-    })
-})
+var port = process.env.PORT || 8080
+app.listen(port, () => { console.log("Running at port "+port+" | http://localhost:"+port+" | Press Ctrl+C to stop") })' > index.js
 
-app.get("*", (req, res) => {
-    res.status(404).render("404",{
-        message:"This page does not exist.",
-        pageTitle:"Error | " + currentFolderName
-    })
-})
+cd routes
 
-var port = 3000 || process.env.PORT
-app.listen(port, () => { console.log("Running at port "+port+" | http://localhost:"+port+" | Press Ctrl+C to stop") })
-' >> index.js
+echo 'const express = require("express")
+const router = express.Router()
 
-cd views
+const homeContollrer = require("../controllers/homeController")
+router.get("/privacy", homeContollrer.Privacy)
+router.get("/", homeContollrer.Index)
+router.get("*", homeContollrer.err404)
 
-echo '<%- include("partials/_header") %>
+module.exports = router
+' > homeRoute.js
 
-<%- include("components/navbar") %>
+cd ../controllers
 
-<div class="text-center mt-3">
-    <h1 class="text-primary">This Your Project Page</h1>
-    <p>Look at <strong>views/index.ejs </strong>to edit here.</p>
-</div>
+echo 'const path = require("path")
 
-<%- include("partials/_footer") %>
-' >> index.ejs
+const projectDirectory = path.join(__dirname,"../..")
+const currentFolderName = path.basename(projectDirectory)
 
-echo '<%- include("partials/_header") %>
-<%- include("components/navbar") %>
+module.exports = {
+    Index: (req, res) => {
+        res.render("index", {
+            pageTitle: "Home Page | " + currentFolderName
+        })
+    },
 
-<div class="container mt-3">
-    <h1>This is a Privacy Page</h1>
-    <p>Place your privacy content here.</p>
-</div>
-<%- include("partials/_footer") %>' >> privacy.ejs
+    Privacy: (req, res) => {
+        res.render("privacy", {
+            pageTitle: "Privacy | " + currentFolderName
+        })
+    },
 
-echo '<%- include("partials/_header") %>
-<%- include("components/navbar") %>
+    err404: (req, res) => {
+        res.status(404).render("404",{
+            message:"This page does not exist.",
+            pageTitle:"Error | " + currentFolderName
+        })
+    }
+}' > homeController.js
 
-<div class="container mt-3">
-    <h1>Error</h1>
-    <hr>
-    <p class="text-danger">
-        <span class="text-dark">Error Message: </span><%= message %>    
-    </p>
-</div>
-
-<%- include("partials/_footer") %>' >> 404.ejs
-
-cd partials
-
-echo '    <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/script.js"></script>
-</body>
-</html>' >> _footer.ejs
+cd ../views
 
 echo '<!DOCTYPE html>
 <html lang="en">
@@ -125,13 +113,46 @@ echo '<!DOCTYPE html>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>' >> _header.ejs
+<body>
+    <%- include components/navbar %>
 
-cd ../components
+    <div class="container mt-3">
+        <%- body %>
+    </div>
+
+</body>
+</html>
+' > layout.ejs
+
+echo '<%- layout("layout") -%>
+
+<div class="text-center mt-3">
+    <h1 class="text-primary">This Your Project Page</h1>
+    <p>Look at <strong>views/index.ejs </strong>to edit here.</p>
+</div>' > index.ejs
+
+echo '<%- layout("layout") -%>
+
+<div class="container mt-3">
+    <h1>This is a Privacy Page</h1>
+    <p>Place your privacy content here.</p>
+</div>' > privacy.ejs
+
+echo '<%- layout("layout") -%>
+
+<div class="container mt-3">
+    <h1>Error</h1>
+    <hr>
+    <p class="text-danger">
+        <span class="text-dark">Error Message: </span><%= message %>    
+    </p>
+</div>' > 404.ejs
+
+cd components/
 
 echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
   <div class="container">
-    <a class="navbar-brand" href="/">Node Web App</a>
+    <a class="navbar-brand" href="/"><%= pageTitle %></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -149,9 +170,10 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
         </li>
     </div>
   </div>
-</nav>' >> navbar.ejs
+</nav>' > navbar.ejs
+
+cd ../..
 
 # Son | Finish
-cd ../..
 
 echo 'Project has created without any problems. Write "node index.js" to run or write "nodemon index.js" to run in development mode. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
