@@ -71,8 +71,7 @@ router.get("/privacy", homeContollrer.Privacy)
 router.get("/", homeContollrer.Index)
 router.get("*", homeContollrer.err404)
 
-module.exports = router
-' > homeRoute.js
+module.exports = router' > homeRoute.js
 
 cd ../controllers
 
@@ -121,8 +120,7 @@ echo '<!DOCTYPE html>
     </div>
 
 </body>
-</html>
-' > layout.ejs
+</html>' > layout.ejs
 
 echo '<%- layout("layout") -%>
 
