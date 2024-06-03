@@ -6,8 +6,11 @@ This project somehow helps you to quickly start a simple web application using n
  - Bootstrap
  - Jquery
  - ExpressJS
- - EJS
+ - EJS EJS-Locals
  - Morgan
+ - Cors
+ - Helmet
+ - Nodemon (For development)
    
 ### Usage
 You can use git bash to run this in windows.
@@ -30,8 +33,11 @@ Bu proje size expressjs, ejs ve nodejs kullanarak hazır ve basit bir web uygula
  - Bootstrap
  - Jquery
  - ExpressJS
- - EJS 
+ - EJS EJS-Locals
  - Morgan
+ - Cors
+ - Helmet
+ - Nodemon (Geliştirme İçin)
    
 ### Kullanım
 Windows'ta kullanmak için git bash kullanabilirsiniz.
