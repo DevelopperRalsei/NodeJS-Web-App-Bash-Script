@@ -38,6 +38,21 @@ cp node_modules/jquery/dist/jquery.min.js public/lib/jquery/
 
 #Dosyaları Düzenleme | Editing created files
 
+cd public/css
+
+echo '/**
+    Write your CSS here.
+*/' > style.css
+
+cd ../js
+
+echo '$(document).ready(()=>{
+    // Write Your JS here. 
+    
+})' > script.js
+
+cd ../..
+
 echo 'PORT = 8080' > .env
 
 echo 'const express = require("express")
@@ -119,6 +134,9 @@ echo '<!DOCTYPE html>
         <%- body %>
     </div>
 
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>' > layout.ejs
 
@@ -174,4 +192,4 @@ cd ../..
 
 # Son | Finish
 
-echo 'Project has created without any problems. Write "node index.js" to run or write "nodemon index.js" to run in development mode. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
+echo 'Project has created without any problems. Write "node index.js" to run. | Proje hiç bir sıkıntı çıkmadan oluşturuldu. Çalıştırmak için "node index.js" yaz' 
