@@ -169,7 +169,9 @@ cd components/
 
 echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
   <div class="container">
-    <a class="navbar-brand" href="/"><%= pageTitle %></a>
+    <a class="navbar-brand" href="/">
+      <%= pageTitle %>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -185,6 +187,7 @@ echo '<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
         <li class="nav-item">
           <a href="/error" class="nav-link">Error Page</a>
         </li>
+      </ul>
     </div>
   </div>
 </nav>' > navbar.ejs
